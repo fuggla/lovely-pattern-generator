@@ -1,15 +1,18 @@
 log = require "lib.log"
 
 function love.load()
+  -- shape types
   CIRCLE = 1
   RECTANGLE = 2
 
+  -- Generator setup
   rng = love.math.newRandomGenerator()
   rng:setSeed(os.time())
   local started = os.time()
   log.info("Generation: Started", started)
   log.info("seed:", rng:getSeed())
 
+ -- Pattern data
   pattern = {
     shape = rng:random(1, 2),
     amount = rng:random(1, 256),
@@ -19,6 +22,7 @@ function love.load()
   }
   width, height = love.graphics.getDimensions()
 
+  -- Pattern generation
   shapes = {}
   for i=1, pattern.amount, 1 do
     shapes[#shapes+1] = {
@@ -30,6 +34,7 @@ function love.load()
     }
   end
 
+  -- We're done here
   log.info("shape:", pattern.shape)
   log.info("amount:", pattern.amount)
   log.info("radius:", pattern.radius)
