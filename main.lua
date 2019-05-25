@@ -1,4 +1,5 @@
 log = require "lib.log"
+local draw = {}
 
 function love.load()
   -- shape types
@@ -65,13 +66,13 @@ end
 
 function love.draw()
   if pattern.shape == CIRCLE then
-    circles()
+    draw.circles()
   elseif pattern.shape == RECTANGLE then
-    rectangles()
+    draw.rectangles()
   end
 end
 
-function circles()
+function draw.circles()
   for k, s in ipairs(shapes) do
     love.graphics.setColor(s.color)
     love.graphics.circle(
@@ -83,7 +84,7 @@ function circles()
   end
 end
 
-function rectangles()
+function draw.rectangles()
   for k, s in ipairs(shapes) do
     love.graphics.setColor(s.color)
     love.graphics.rectangle(
