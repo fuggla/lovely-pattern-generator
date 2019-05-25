@@ -96,7 +96,7 @@ end
 function love.keypressed(key)
    if key == "escape" or key == "q" then
       love.event.quit()
-    elseif key == "r" then
+    elseif key == "r"  or key == "f5" then
       love.load()
    end
 end
