@@ -30,11 +30,11 @@ function love.load()
     }
   end
 
-  log.info("shape: " .. pattern.shape)
-  log.info("amount: " .. pattern.amount)
-  log.info("radius: " .. pattern.radius)
+  log.info("shape:", pattern.shape)
+  log.info("amount:", pattern.amount)
+  log.info("radius:", pattern.radius)
   local completed = os.time() - started
-  log.info("Generation: Completed in " .. completed + 1 .. " second(s)")
+  log.info("Generation: Completed in ", completed + 1, "second(s)")
   print("---")
 end
 
