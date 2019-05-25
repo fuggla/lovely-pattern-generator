@@ -1,6 +1,7 @@
 log = require "lib.log"
 
 function love.load()
+  CIRCLE = 1
   rng = love.math.newRandomGenerator( )
   rng:setSeed(os.time())
   pattern = {
@@ -24,6 +25,12 @@ function love.load()
 end
 
 function love.draw()
+  if pattern.shape == CIRCLE then
+    circles()
+  end
+end
+
+function circles()
   for k, s in ipairs(shapes) do
     love.graphics.circle(
         "fill",
