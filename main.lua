@@ -15,10 +15,10 @@ function love.load()
  -- Pattern base values
   pattern = {
     shape = rng:random(1, 2),
-    amount = rng:random(1, 256),
-    radius = rng:random(1, 64),
-    width = rng:random(1, 64),
-    height = rng:random(1, 64)
+    amount = rng:random(1, 512),
+    radius = rng:random(1, 128),
+    width = rng:random(1, 128),
+    height = rng:random(1, 128)
   }
   width, height = love.graphics.getDimensions()
 
