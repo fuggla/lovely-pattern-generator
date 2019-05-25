@@ -14,55 +14,30 @@ function love.load()
   log.info("Generation: Started", started)
   log.info("seed:", rng:getSeed())
 
- -- Pattern base values
-  pattern = gen.pattern("random")
-
-  -- Since we now have a max size we can generate a min size
-  pattern.size.min = rng:random(1, pattern.size.max)
-
-  -- color base values
-  color = {
-    r = rng:random(0, 255),
-    g = rng:random(0, 255),
-    b = rng:random(0, 255)
-  }
-
   -- Background grayscale
-  bg = gen.color(255)
+  local bg = gen.color(255)
   love.graphics.setBackgroundColor(bg ,bg ,bg)
 
-  -- Pattern generation
-  width, height = love.graphics.getDimensions()
-  shapes = {}
-  for i=1, pattern.amount, 1 do
-    shapes[#shapes+1] = {
-      x = rng:random(0, width),
-      y = rng:random(0, height),
-      r = rng:random(pattern.size.min, pattern.size.max),
-      w = rng:random(pattern.size.min, pattern.size.max),
-      h = rng:random(pattern.size.min, pattern.size.max),
-      color = {
-        gen.color(255),
-        gen.color(255),
-        gen.color(255)
-      }
-    }
-  end
+ -- Base values
+  base = gen.base("random")
+
+  -- Generate shapes using base values
+  shapes = gen.shapes("random", base)
 
   -- We're done here
-  log.info("shape:", pattern.shape)
-  log.info("amount:", pattern.amount)
-  log.info("size:", pattern.size.min, ">", pattern.size.max)
-  log.info("color:", color.r, color.g, color.b)
+  log.info("shape:", base.shape)
+  log.info("amount:", base.amount)
+  log.info("size:", base.size.min, ">", base.size.max)
+  log.info("color:", base.color.r, base.color.g, base.color.b)
   local completed = os.time() - started
   log.info("Generation: Completed in ", completed + 1, "second(s)")
   print("---")
 end
 
 function love.draw()
-  if pattern.shape == CIRCLE then
+  if base.shape == CIRCLE then
     draw.circles()
-  elseif pattern.shape == RECTANGLE then
+  elseif base.shape == RECTANGLE then
     draw.rectangles()
   end
 end
@@ -107,17 +82,50 @@ function gen.color(max, min)
   return rng:random(min, max) / 255
 end
 
-function gen.pattern(name)
-  local pattern = {}
+-- Generate base values for shape generation
+function gen.base(name)
+  local base = {}
   if name == "random" then
-    pattern = {
+    base = {
       shape = rng:random(1, 2),
       amount = rng:random(1, 512),
       size = {
         min = 0,
         max = rng:random(1, 128)
+      },
+      color = {
+        r = rng:random(0, 255),
+        g = rng:random(0, 255),
+        b = rng:random(0, 255)
       }
     }
+    -- Since we now have a max size we can generate a min size
+    base.size.min = rng:random(1, base.size.max)
   end
-  return pattern
+  return base
+end
+
+-- Generate shapes using table of base values
+function gen.shapes(name, base)
+  local width, height = love.graphics.getDimensions()
+  local shapes = {}
+
+  -- Shapes a spread out in a random fashion
+  if name == "random" then
+    for i=1, base.amount, 1 do
+      shapes[#shapes+1] = {
+        x = rng:random(0, width),
+        y = rng:random(0, height),
+        r = rng:random(base.size.min, base.size.max),
+        w = rng:random(base.size.min, base.size.max),
+        h = rng:random(base.size.min, base.size.max),
+        color = {
+          gen.color(base.color.r),
+          gen.color(base.color.g),
+          gen.color(base.color.b)
+        }
+      }
+    end
+  end
+  return shapes
 end
