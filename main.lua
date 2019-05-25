@@ -59,3 +59,11 @@ function rectangles()
     )
   end
 end
+
+function love.keypressed(key)
+   if key == "escape" or key == "q" then
+      love.event.quit()
+    elseif key == "r" then
+      love.load()
+   end
+end
