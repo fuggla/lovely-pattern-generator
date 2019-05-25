@@ -6,6 +6,8 @@ function love.load()
   -- shape types
   CIRCLE = 1
   RECTANGLE = 2
+  RANDOM = 1
+  CENTER = 2
 
   -- Generator setup
   rng = love.math.newRandomGenerator()
@@ -23,7 +25,7 @@ function love.load()
   shape = base.shape
 
   -- Generate shapes using base values
-  shapes = gen.shapes("center", base)
+  shapes = gen.shapes(base)
 
   -- We're done here
   log.info("shape:", base.shape)
@@ -107,13 +109,15 @@ function gen.base(name)
 end
 
 -- Generate shapes using table of base values
-function gen.shapes(name, base)
+function gen.shapes(base)
   local shapes = {}
   local window = {}
+  local spread = rng:random(1, 2)
+  log.info("spread:", spread)
 
   -- Shapes a spread out in a random fashion
   window.w, window.h = love.graphics.getDimensions()
-  if name == "random" then
+  if spread == RANDOM then
     for i=1, base.amount, 1 do
       shapes[#shapes+1] = {
         x = rng:random(0, window.w),
@@ -128,7 +132,7 @@ function gen.shapes(name, base)
         }
       }
     end
-  elseif name == "center" then
+  elseif spread == CENTER then
     local center = rng:random(5, 50) / 100
     log.info("center:", center * 100 .. "%")
     for i=1, base.amount, 1 do
