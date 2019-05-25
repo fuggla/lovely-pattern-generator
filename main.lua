@@ -85,8 +85,8 @@ function rectangles()
     love.graphics.setColor(s.color)
     love.graphics.rectangle(
         "fill",
-        s.x,
-        s.y,
+        s.x - s.w / 2,
+        s.y - s.h / 2,
         s.w,
         s.h
     )
