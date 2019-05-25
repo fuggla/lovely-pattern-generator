@@ -1,5 +1,6 @@
 log = require "lib.log"
 local draw = {}
+local gen = {}
 
 function love.load()
   -- shape types
@@ -14,14 +15,8 @@ function love.load()
   log.info("seed:", rng:getSeed())
 
  -- Pattern base values
-  pattern = {
-    shape = rng:random(1, 2),
-    amount = rng:random(1, 512),
-    size = {
-      min = 0,
-      max = rng:random(1, 128)
-    }
-  }
+  pattern = gen.pattern("random")
+
   -- Since we now have a max size we can generate a min size
   pattern.size.min = rng:random(1, pattern.size.max)
 
@@ -33,7 +28,7 @@ function love.load()
   }
 
   -- Background grayscale
-  bg = genColor(255)
+  bg = gen.color(255)
   love.graphics.setBackgroundColor(bg ,bg ,bg)
 
   -- Pattern generation
@@ -47,9 +42,9 @@ function love.load()
       w = rng:random(pattern.size.min, pattern.size.max),
       h = rng:random(pattern.size.min, pattern.size.max),
       color = {
-        genColor(255),
-        genColor(255),
-        genColor(255)
+        gen.color(255),
+        gen.color(255),
+        gen.color(255)
       }
     }
   end
@@ -107,7 +102,22 @@ end
 
 -- Generate an 8bit color
 -- return it in löve color space
-function genColor(max, min)
+function gen.color(max, min)
   min = min or 0
   return rng:random(min, max) / 255
+end
+
+function gen.pattern(name)
+  local pattern = {}
+  if name == "random" then
+    pattern = {
+      shape = rng:random(1, 2),
+      amount = rng:random(1, 512),
+      size = {
+        min = 0,
+        max = rng:random(1, 128)
+      }
+    }
+  end
+  return pattern
 end
