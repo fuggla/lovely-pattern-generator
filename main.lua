@@ -12,7 +12,7 @@ function love.load()
   log.info("Generation: Started", started)
   log.info("seed:", rng:getSeed())
 
- -- Pattern data
+ -- Pattern base values
   pattern = {
     shape = rng:random(1, 2),
     amount = rng:random(1, 256),
@@ -22,6 +22,13 @@ function love.load()
   }
   width, height = love.graphics.getDimensions()
 
+  -- color base values
+  color = {
+    r = rng:random(0, 255),
+    g = rng:random(0, 255),
+    b = rng:random(0, 255)
+  }
+
   -- Pattern generation
   shapes = {}
   for i=1, pattern.amount, 1 do
@@ -30,7 +37,12 @@ function love.load()
       y = rng:random(0, height),
       r = rng:random(1, pattern.radius),
       w = rng:random(1, pattern.radius),
-      h = rng:random(1, pattern.radius)
+      h = rng:random(1, pattern.radius),
+      color = {
+        rng:random(1, color.r) / 255,
+        rng:random(1, color.g) / 255,
+        rng:random(1, color.b) / 255
+      }
     }
   end
 
@@ -38,6 +50,7 @@ function love.load()
   log.info("shape:", pattern.shape)
   log.info("amount:", pattern.amount)
   log.info("radius:", pattern.radius)
+  log.info("color:", color.r, color.g, color.b)
   local completed = os.time() - started
   log.info("Generation: Completed in ", completed + 1, "second(s)")
   print("---")
@@ -53,6 +66,7 @@ end
 
 function circles()
   for k, s in ipairs(shapes) do
+    love.graphics.setColor(s.color)
     love.graphics.circle(
         "fill",
         s.x,
@@ -64,6 +78,7 @@ end
 
 function rectangles()
   for k, s in ipairs(shapes) do
+    love.graphics.setColor(s.color)
     love.graphics.rectangle(
         "fill",
         s.x,
