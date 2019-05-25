@@ -75,10 +75,10 @@ function circles()
   for k, s in ipairs(shapes) do
     love.graphics.setColor(s.color)
     love.graphics.circle(
-        "fill",
-        s.x,
-        s.y,
-        s.r
+      "fill",
+      s.x,
+      s.y,
+      s.r
     )
   end
 end
@@ -87,11 +87,11 @@ function rectangles()
   for k, s in ipairs(shapes) do
     love.graphics.setColor(s.color)
     love.graphics.rectangle(
-        "fill",
-        s.x - s.w / 2,
-        s.y - s.h / 2,
-        s.w,
-        s.h
+      "fill",
+      s.x - s.w / 2,
+      s.y - s.h / 2,
+      s.w,
+      s.h
     )
   end
 end
