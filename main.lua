@@ -16,9 +16,7 @@ function love.load()
   pattern = {
     shape = rng:random(1, 2),
     amount = rng:random(1, 512),
-    radius = rng:random(1, 128),
-    width = rng:random(1, 128),
-    height = rng:random(1, 128)
+    size = rng:random(1, 128),
   }
   width, height = love.graphics.getDimensions()
 
@@ -39,9 +37,9 @@ function love.load()
     shapes[#shapes+1] = {
       x = rng:random(0, width),
       y = rng:random(0, height),
-      r = rng:random(1, pattern.radius),
-      w = rng:random(1, pattern.radius),
-      h = rng:random(1, pattern.radius),
+      r = rng:random(1, pattern.size),
+      w = rng:random(1, pattern.size),
+      h = rng:random(1, pattern.size),
       color = {
         genColor(255),
         genColor(255),
@@ -53,7 +51,7 @@ function love.load()
   -- We're done here
   log.info("shape:", pattern.shape)
   log.info("amount:", pattern.amount)
-  log.info("radius:", pattern.radius)
+  log.info("size:", pattern.size)
   log.info("color:", color.r, color.g, color.b)
   local completed = os.time() - started
   log.info("Generation: Completed in ", completed + 1, "second(s)")
