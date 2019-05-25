@@ -2,12 +2,15 @@ log = require "lib.log"
 
 function love.load()
   CIRCLE = 1
+  RECTANGLE = 2
   rng = love.math.newRandomGenerator( )
   rng:setSeed(os.time())
   pattern = {
-    shape = rng:random(1, 1),
+    shape = rng:random(1, 2),
     amount = rng:random(1, 256),
-    radius = rng:random(1, 64)
+    radius = rng:random(1, 64),
+    width = rng:random(1, 64),
+    height = rng:random(1, 64)
   }
   width, height = love.graphics.getDimensions()
   shapes = {}
@@ -15,7 +18,9 @@ function love.load()
     shapes[#shapes+1] = {
       x = rng:random(0, width),
       y = rng:random(0, height),
-      r = rng:random(1, pattern.radius)
+      r = rng:random(1, pattern.radius),
+      w = rng:random(1, pattern.radius),
+      h = rng:random(1, pattern.radius)
     }
   end
 
@@ -27,6 +32,8 @@ end
 function love.draw()
   if pattern.shape == CIRCLE then
     circles()
+  elseif pattern.shape == RECTANGLE then
+    rectangles()
   end
 end
 
@@ -37,6 +44,18 @@ function circles()
         s.x,
         s.y,
         s.r
+    )
+  end
+end
+
+function rectangles()
+  for k, s in ipairs(shapes) do
+    love.graphics.rectangle(
+        "fill",
+        s.x,
+        s.y,
+        s.w,
+        s.h
     )
   end
 end
