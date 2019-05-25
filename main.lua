@@ -1,10 +1,12 @@
+log = require "lib.log"
+
 function love.load()
   rng = love.math.newRandomGenerator( )
   rng:setSeed(os.time())
   pattern = {
-    order = rng:random(1, 1),
-    amount = rng:random(1, 100),
-    radius = rng:random(1, 100)
+    shape = rng:random(1, 1),
+    amount = rng:random(1, 256),
+    radius = rng:random(1, 64)
   }
   width, height = love.graphics.getDimensions()
   shapes = {}
