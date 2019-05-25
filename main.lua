@@ -108,15 +108,16 @@ end
 
 -- Generate shapes using table of base values
 function gen.shapes(name, base)
-  local width, height = love.graphics.getDimensions()
   local shapes = {}
+  local window = {}
 
   -- Shapes a spread out in a random fashion
+  window.w, window.h = love.graphics.getDimensions()
   if name == "random" then
     for i=1, base.amount, 1 do
       shapes[#shapes+1] = {
-        x = rng:random(0, width),
-        y = rng:random(0, height),
+        x = rng:random(0, window.w),
+        y = rng:random(0, window.h),
         r = rng:random(base.size.min, base.size.max),
         w = rng:random(base.size.min, base.size.max),
         h = rng:random(base.size.min, base.size.max),
