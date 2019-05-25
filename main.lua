@@ -1,4 +1,4 @@
-log = require "lib.log"
+local log = require "lib.log"
 local draw = {}
 local gen = {}
 
