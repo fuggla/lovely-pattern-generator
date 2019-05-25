@@ -16,9 +16,13 @@ function love.load()
   pattern = {
     shape = rng:random(1, 2),
     amount = rng:random(1, 512),
-    size = rng:random(1, 128),
+    size = {
+      min = 0,
+      max = rng:random(1, 128)
+    }
   }
-  width, height = love.graphics.getDimensions()
+  -- Since we now have a max size we can generate a min size
+  pattern.size.min = rng:random(1, pattern.size.max)
 
   -- color base values
   color = {
@@ -32,14 +36,15 @@ function love.load()
   love.graphics.setBackgroundColor(bg ,bg ,bg)
 
   -- Pattern generation
+  width, height = love.graphics.getDimensions()
   shapes = {}
   for i=1, pattern.amount, 1 do
     shapes[#shapes+1] = {
       x = rng:random(0, width),
       y = rng:random(0, height),
-      r = rng:random(1, pattern.size),
-      w = rng:random(1, pattern.size),
-      h = rng:random(1, pattern.size),
+      r = rng:random(pattern.size.min, pattern.size.max),
+      w = rng:random(pattern.size.min, pattern.size.max),
+      h = rng:random(pattern.size.min, pattern.size.max),
       color = {
         genColor(255),
         genColor(255),
@@ -51,7 +56,7 @@ function love.load()
   -- We're done here
   log.info("shape:", pattern.shape)
   log.info("amount:", pattern.amount)
-  log.info("size:", pattern.size)
+  log.info("size:", pattern.size.min, ">", pattern.size.max)
   log.info("color:", color.r, color.g, color.b)
   local completed = os.time() - started
   log.info("Generation: Completed in ", completed + 1, "second(s)")
