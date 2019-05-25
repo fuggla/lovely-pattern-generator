@@ -14,8 +14,11 @@ function love.load()
       y = rng:random(0, height),
       r = rng:random(1, pattern.radius)
     }
-    print(shapes[#shapes].x, shapes[#shapes].y, shapes[#shapes].r)
   end
+
+  log.info("shape: " .. pattern.shape)
+  log.info("amount: " .. pattern.amount)
+  log.info("radius: " .. pattern.radius)
 end
 
 function love.draw()
