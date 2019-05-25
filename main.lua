@@ -30,7 +30,7 @@ function love.load()
   }
 
   -- Background grayscale
-  bg = rng:random(0, 255) / 255
+  bg = genColor(255)
   love.graphics.setBackgroundColor(bg ,bg ,bg)
 
   -- Pattern generation
@@ -43,9 +43,9 @@ function love.load()
       w = rng:random(1, pattern.radius),
       h = rng:random(1, pattern.radius),
       color = {
-        rng:random(1, color.r) / 255,
-        rng:random(1, color.g) / 255,
-        rng:random(1, color.b) / 255
+        genColor(255),
+        genColor(255),
+        genColor(255)
       }
     }
   end
@@ -99,4 +99,11 @@ function love.keypressed(key)
     elseif key == "r" then
       love.load()
    end
+end
+
+-- Generate an 8bit color
+-- return it in löve color space
+function genColor(max, min)
+  min = min or 0
+  return rng:random(min, max) / 255
 end
