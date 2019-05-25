@@ -130,6 +130,7 @@ function gen.shapes(name, base)
     end
   elseif name == "center" then
     local center = rng:random(5, 50) / 100
+    log.info("center:", center * 100 .. "%")
     for i=1, base.amount, 1 do
       shapes[#shapes+1] = {
         x = rng:random(window.w * center, window.w * (1 - center)),
