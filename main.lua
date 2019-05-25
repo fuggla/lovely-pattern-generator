@@ -19,7 +19,8 @@ function love.load()
   love.graphics.setBackgroundColor(bg ,bg ,bg)
 
  -- Base values
-  base = gen.base("random")
+  local base = gen.base("random")
+  shape = base.shape
 
   -- Generate shapes using base values
   shapes = gen.shapes("random", base)
@@ -35,9 +36,9 @@ function love.load()
 end
 
 function love.draw()
-  if base.shape == CIRCLE then
+  if shape == CIRCLE then
     draw.circles()
-  elseif base.shape == RECTANGLE then
+  elseif shape == RECTANGLE then
     draw.rectangles()
   end
 end
