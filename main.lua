@@ -29,6 +29,10 @@ function love.load()
     b = rng:random(0, 255)
   }
 
+  -- Background grayscale
+  bg = rng:random(0, 255) / 255
+  love.graphics.setBackgroundColor(bg ,bg ,bg)
+
   -- Pattern generation
   shapes = {}
   for i=1, pattern.amount, 1 do
