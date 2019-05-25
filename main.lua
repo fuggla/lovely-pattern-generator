@@ -23,7 +23,7 @@ function love.load()
   shape = base.shape
 
   -- Generate shapes using base values
-  shapes = gen.shapes("random", base)
+  shapes = gen.shapes("center", base)
 
   -- We're done here
   log.info("shape:", base.shape)
@@ -118,6 +118,22 @@ function gen.shapes(name, base)
       shapes[#shapes+1] = {
         x = rng:random(0, window.w),
         y = rng:random(0, window.h),
+        r = rng:random(base.size.min, base.size.max),
+        w = rng:random(base.size.min, base.size.max),
+        h = rng:random(base.size.min, base.size.max),
+        color = {
+          gen.color(base.color.r),
+          gen.color(base.color.g),
+          gen.color(base.color.b)
+        }
+      }
+    end
+  elseif name == "center" then
+    local center = 0.15
+    for i=1, base.amount, 1 do
+      shapes[#shapes+1] = {
+        x = rng:random(window.w * center, window.w * (1 - center)),
+        y = rng:random(window.h * center, window.h * (1 - center)),
         r = rng:random(base.size.min, base.size.max),
         w = rng:random(base.size.min, base.size.max),
         h = rng:random(base.size.min, base.size.max),
