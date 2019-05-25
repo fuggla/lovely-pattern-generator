@@ -3,8 +3,13 @@ log = require "lib.log"
 function love.load()
   CIRCLE = 1
   RECTANGLE = 2
-  rng = love.math.newRandomGenerator( )
+
+  rng = love.math.newRandomGenerator()
   rng:setSeed(os.time())
+  local started = os.time()
+  log.info("Generation: Started", started)
+  log.info("seed:", rng:getSeed())
+
   pattern = {
     shape = rng:random(1, 2),
     amount = rng:random(1, 256),
@@ -13,6 +18,7 @@ function love.load()
     height = rng:random(1, 64)
   }
   width, height = love.graphics.getDimensions()
+
   shapes = {}
   for i=1, pattern.amount, 1 do
     shapes[#shapes+1] = {
@@ -27,6 +33,9 @@ function love.load()
   log.info("shape: " .. pattern.shape)
   log.info("amount: " .. pattern.amount)
   log.info("radius: " .. pattern.radius)
+  local completed = os.time() - started
+  log.info("Generation: Completed in " .. completed + 1 .. " second(s)")
+  print("---")
 end
 
 function love.draw()
