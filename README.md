@@ -7,10 +7,11 @@ Generates random patterns using the löve framework.
 - `q` to quit
 - `r` to generate pattern
 
-## Things that might happend
+## Things that might be
 
 - Input custom seed
 - Change base settings (e.g. color range)
+- Save generated pattern as image
 
 ## Libraries
 
