@@ -80,8 +80,11 @@ end
 
 -- Generate an 8bit color
 -- return it in löve color space
-function gen.color(max, min)
-  min = min or 0
+function gen.color(min, max)
+  if not max then
+    max = min
+    min = 0
+  end
   return rng:random(min, max) / 255
 end
 
