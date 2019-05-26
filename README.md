@@ -2,7 +2,7 @@
 
 Generates random patterns using the löve framework.
 
-## Controles
+## Keys
 
 - `q` to quit
 - `r` to generate pattern
@@ -10,7 +10,7 @@ Generates random patterns using the löve framework.
 ## Things that might be
 
 - Input custom seed
-- Change base settings (e.g. color range)
+- Input custom settings (e.g. color range)
 - Save generated pattern as image
 
 ## Libraries
