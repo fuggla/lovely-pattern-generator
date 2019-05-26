@@ -2,6 +2,11 @@
 
 Generates random patterns using the löve framework.
 
+## Controles
+
+- `q` to quit
+- `r` to generate pattern
+
 ## Things that might happend
 
 - Input custom seed
