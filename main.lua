@@ -156,3 +156,24 @@ function gen.shapes(base)
   end
   return shapes
 end
+
+function gen.effect(chance)
+  local effect = false
+  local name = "none"
+  chance = rng:random(chance)
+  if chance == 1 then
+    effect = moonshine(moonshine.effects.desaturate)
+    name = "desaturate"
+  elseif chance == 2 then
+    effect = moonshine(moonshine.effects.glow)
+    name = "glow"
+  elseif chance == 3 then
+    effect = moonshine(moonshine.effects.godsray)
+    name = "godsray"
+  elseif chance == 4 then
+    effect = moonshine(moonshine.effects.vignette)
+    name = "vignette"
+  end
+  log.info("effect:", name)
+  return effect
+end
