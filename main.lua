@@ -28,6 +28,9 @@ function love.load()
   -- Generate shapes using base values
   shapes = gen.shapes(base)
 
+  -- Setup post-processing
+  effect = gen.effect(18)
+
   -- We're done here
   log.info("shape:", base.shape)
   log.info("amount:", base.amount)
@@ -39,10 +42,20 @@ function love.load()
 end
 
 function love.draw()
-  if shape == CIRCLE then
-    draw.circles()
-  elseif shape == RECTANGLE then
-    draw.rectangles()
+  if effect then
+    effect(function()
+      if shape == CIRCLE then
+        draw.circles()
+      elseif shape == RECTANGLE then
+        draw.rectangles()
+      end
+    end)
+  else
+      if shape == CIRCLE then
+      draw.circles()
+    elseif shape == RECTANGLE then
+      draw.rectangles()
+    end
   end
 end
 
