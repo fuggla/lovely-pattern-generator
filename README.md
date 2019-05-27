@@ -18,3 +18,4 @@ Generates random patterns using the löve framework.
 Included in the repo:
 
 - log.lua: https://github.com/rxi/log.lua
+- moonshine: https://github.com/vrld/moonshine/
